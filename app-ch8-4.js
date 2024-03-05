@@ -48,6 +48,35 @@ class LinkedList {
         }
     }
 
+    // remove the first node
+    shift(){
+        if(!this.head){
+            return null
+        }else if(this.length === 1){
+            const shiftedNode = this.head
+            this.head = null
+            this.length--
+            return shiftedNode
+        }else{
+            const shiftedNode = this.head
+            this.head = shiftedNode.next
+            this.length--
+            shiftedNode.next = null
+            return shiftedNode
+        }
+    }
+
+    // add a node to the beginning of the list
+    unshift(value){
+        let newNode = new Node(value)
+
+        !this.head
+            ? this.head = newNode
+            : [this.head, newNode.next] = [newNode, this.head]
+
+        this.length++
+    }
+
     printAll() {
         if (this.length === 0) {
             console.log('Nothing in the linked list.')
@@ -62,13 +91,16 @@ class LinkedList {
 }
 
 const linkedList = new LinkedList()
+linkedList.shift()
 linkedList.push('Andy')
 linkedList.push('Bob')
 linkedList.push('Cathy')
 linkedList.push('David')
-linkedList.pop()
-linkedList.pop()
-linkedList.pop()
+linkedList.push('Eva')
 const removedNode = linkedList.pop()
+const shiftNode = linkedList.shift()
 console.log('removedNode:', removedNode)
+console.log('shiftNode:', shiftNode)
+linkedList.unshift('Zoe')
 console.log('length:', linkedList.length)
+linkedList.printAll()
