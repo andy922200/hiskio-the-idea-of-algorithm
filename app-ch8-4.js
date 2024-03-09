@@ -77,6 +77,45 @@ class LinkedList {
         this.length++
     }
 
+    // insert a node at a specific position
+    insertAt(index, value){
+        if (index < 0 || index > this.length) return null
+        if (index === 0) return this.unshift(value)
+        if (index === this.length) return this.push(value)
+
+        let currentNode = this.head
+        let newNode = new Node(value)
+
+        for (let i = 0; i < index - 1; i++) {
+            currentNode = currentNode.next
+        }
+
+        newNode.next = currentNode.next
+        currentNode.next = newNode
+        this.length++
+        return
+    }
+
+    // delete a node at a specific position
+    deleteAt(index){
+        if (index < 0 || index > this.length) return null
+        if (index === 0) return this.shift()
+        if (index === this.length) return this.pop()
+
+        let currentNode = this.head
+
+        for (let i = 0; i < index - 1; i++) {
+            currentNode = currentNode.next
+        }
+
+        const removedNode = currentNode.next
+        currentNode.next = currentNode.next.next
+
+        this.length--
+        removedNode.next = null
+        return removedNode
+    }
+
     printAll() {
         if (this.length === 0) {
             console.log('Nothing in the linked list.')
@@ -104,3 +143,15 @@ console.log('shiftNode:', shiftNode)
 linkedList.unshift('Zoe')
 console.log('length:', linkedList.length)
 linkedList.printAll()
+
+console.log('-------------------')
+const linkedList2 = new LinkedList()
+linkedList2.push('Alex')
+linkedList2.push('Ben')
+linkedList2.push('Colin')
+linkedList2.push('Dylan')
+linkedList2.insertAt(3, 'Eva')
+const deletedAtNode = linkedList2.deleteAt(1)
+console.log('deletedAtNode:', deletedAtNode)
+console.log('length:', linkedList2.length)
+linkedList2.printAll()
