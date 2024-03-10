@@ -11,6 +11,18 @@ class LinkedList {
         this.length = 0
     }
 
+    // get the node's value at a specific position
+    get(index){
+        if(index < 0 || index >= this.length) return null
+
+        let currentNode = this.head
+        for(let i=0; i<index; i++){
+            currentNode = currentNode.next
+        }
+
+        return currentNode.value
+    }
+
     push(value) {
         const newNode = new Node(value)
         if (this.head === null) {
@@ -155,3 +167,11 @@ const deletedAtNode = linkedList2.deleteAt(1)
 console.log('deletedAtNode:', deletedAtNode)
 console.log('length:', linkedList2.length)
 linkedList2.printAll()
+
+console.log('-------------------')
+const linkedList3 = new LinkedList()
+linkedList3.push('Apple')
+linkedList3.push('Banana')
+linkedList3.push('Cherry')
+console.log('length:', linkedList3.length)
+console.log('Get the value at index 1:', linkedList3.get(1))
