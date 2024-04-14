@@ -72,6 +72,26 @@ class BinarySearchTree {
             }
         }
     }
+
+    searchRecursive(x, key) {
+        if (x === null || key === x.key) return x;
+
+        return key < x.key
+            ? this.searchRecursive(x.left, key)
+            : this.searchRecursive(x.right, key);
+    }
+
+    searchIteratively(x, key) {
+        while (x !== null && key !== x.key) {
+            x = key < x.key ? x.left : x.right;
+        }
+
+        if ( x === null){
+            return 'Not found';
+        }
+
+        return x;
+    }
 }
 
 const bst1 = new BinarySearchTree();
@@ -95,3 +115,6 @@ console.log('PreOrder:', bst1.path)
 console.log('InOrder:', bst2.path)
 console.log('PostOrder:', bst3.path)
 console.log('BFTT:', bst4.queue.map(node => node.key).join(' '))
+console.log('Node 13:', bst1.searchIteratively(bst1.root, 13))
+console.log('Node 6:', bst1.searchIteratively(bst1.root, 6))
+console.log('Node -10:', bst1.searchIteratively(bst1.root, -10))
